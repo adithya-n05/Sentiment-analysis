@@ -29,6 +29,7 @@ def Scraper(AppCountry, AppName):
     print(axis_bank)
 
     dataframepd = pd.json_normalize(axis_bank)
+    dataframepd["at"] = dataframepd["at"].astype(str)
 
     print("Storing to pandas data frame:")
     print(dataframepd)
@@ -43,7 +44,7 @@ def Scraper(AppCountry, AppName):
         review = text.encode('latin-1', 'replace').decode('latin-1')
         pdf.write(12, review) 
         pdf.ln()
-        text = "Date and time - " + str(dataframepd[dataframepd.columns[7]].values.tolist()[i]) + ":"
+        text = "Date and time - " + dataframepd[dataframepd.columns[7]].values.tolist()[i] + ":"
         review = text.encode('latin-1', 'replace').decode('latin-1')
         pdf.write(12, review) 
         pdf.ln()
