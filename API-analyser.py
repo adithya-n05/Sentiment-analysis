@@ -6,7 +6,7 @@ headers = {
     'x-api-key': 'ask_f3aa063182fcda8c62f80973f01088b4'
 }
 
-parser = argparse.ArgumentParser(description="Embeddings creation tool",
+parser = argparse.ArgumentParser(description="Chatbot for Tagit Sentiment Analysis",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("-s", "--store", type=str, help="Which store to access for given app name. Options are play_store and app_store")
 parser.add_argument("-n", "--name", help="App name")
