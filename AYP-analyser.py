@@ -12,12 +12,11 @@ parser.add_argument("-s", "--store", type=str, help="Which store to access for g
 parser.add_argument("-n", "--name", help="App name")
 args = parser.parse_args()
 config = vars(args)
-print(config)
 
 AppName = config["name"]
 Store = config["store"]
 
-file_data = open("transfers-guide.pdf", 'rb')
+file_data = open("Comments-" + Store + "-" + AppName + ".pdf", 'rb')
 
 response = requests.post('https://api.askyourpdf.com/v1/api/upload', headers=headers,
  files={'file': file_data})
