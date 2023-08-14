@@ -1,9 +1,7 @@
-argparse
 app_store_scraper
-google_play_scraper
 fpdf
-datetime
+google_play_scraper
 llama_index
-pandas
 openai
-pypdf
+pandas
+Requests

@@ -33,7 +33,7 @@ def Scraper(AppCountry, AppName):
 
     print("Storing to pandas data frame:")
     print(dataframepd)
-    print("Saving to disk")
+    print("Saving to disk...")
 
     for i in range(len(dataframepd[dataframepd.columns[0]].values.tolist())):
         text = str(dataframepd[dataframepd.columns[1]].values.tolist()[i]) + ":"
