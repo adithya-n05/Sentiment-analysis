@@ -35,22 +35,29 @@ def Scraper(AppCountry, AppName):
     print(dataframepd)
     print("Saving to disk...")
 
+    text = "The following contains a list of all the reviews for the app " + AppName + "on the play store. Each review contains the reviwer's username, the score they had given, the time the review was posted and the actual review details."
+    review = text.encode('latin-1', 'replace').decode('latin-1')
+    pdf.write(5, review) 
+
     for i in range(len(dataframepd[dataframepd.columns[0]].values.tolist())):
+        text = "Review number: " + str(i)
+        review = text.encode('latin-1', 'replace').decode('latin-1')
+        pdf.write(5, review) 
         text = str(dataframepd[dataframepd.columns[1]].values.tolist()[i]) + ":"
         review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(12, review) 
+        pdf.write(5, review) 
         pdf.ln()
         text = "Score - " + str(dataframepd[dataframepd.columns[4]].values.tolist()[i]) + ":"
         review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(12, review) 
+        pdf.write(5, review) 
         pdf.ln()
         text = "Date and time - " + dataframepd[dataframepd.columns[7]].values.tolist()[i] + ":"
         review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(12, review) 
+        pdf.write(5, review) 
         pdf.ln()
         text = str(dataframepd[dataframepd.columns[3]].values.tolist()[i]) + ":"
         review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(12, review)
+        pdf.write(5, review)
         pdf.ln()
 
 

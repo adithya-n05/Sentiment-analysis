@@ -3,7 +3,7 @@ import argparse
 import json
 
 headers = {
-    'x-api-key': 'ask_f3aa063182fcda8c62f80973f01088b4'
+    'x-api-key': 'ask_589fc27b7d9799ce1e82fd38624339da'
 }
 
 parser = argparse.ArgumentParser(description="Chatbot for Tagit Sentiment Analysis",
@@ -15,9 +15,12 @@ config = vars(args)
 
 AppName = config["name"]
 Store = config["store"]
+print(config)
 
+print("Opening file...")
 file_data = open("Comments-" + Store + "-" + AppName + ".pdf", 'rb')
 
+print("Communicating with AYP servers...")
 response = requests.post('https://api.askyourpdf.com/v1/api/upload', headers=headers,
  files={'file': file_data})
 
@@ -28,7 +31,7 @@ else:
 
 headers = {
     'Content-Type': 'application/json',
-    'x-api-key': 'ask_f3aa063182fcda8c62f80973f01088b4'
+    'x-api-key': 'ask_589fc27b7d9799ce1e82fd38624339da'
 }
 
 docid = response.json()

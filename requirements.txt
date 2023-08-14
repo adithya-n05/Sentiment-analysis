@@ -1,7 +1,7 @@
-app_store_scraper
-fpdf
-google_play_scraper
-llama_index
-openai
-pandas
-Requests
+app_store_scraper==0.3.5
+fpdf==1.7.2
+google_play_scraper==1.2.4
+llama_index==0.7.16
+openai==0.27.8
+pandas==2.0.3
+Requests==2.31.0
