@@ -2,6 +2,7 @@ import argparse
 import google_play_scraper
 import fpdf
 import pandas as pd
+import pdfkit
 
 parser = argparse.ArgumentParser(description="Embeddings creation tool",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -34,36 +35,18 @@ def Scraper(AppCountry, AppName):
     print(dataframepd)
     print("Saving to disk...")
 
-    text = "The following contains a list of all the reviews for the app " + AppName + "on the play store. Each review contains the reviwer's username, the score they had given, the time the review was posted and the actual review details."
-    review = text.encode('latin-1', 'replace').decode('latin-1')
-    pdf.write(2, review) 
-    pdf.ln()
+    html_table = dataframepd.to_html()
 
-    for i in range(len(dataframepd[dataframepd.columns[0]].values.tolist())):
-        text = "Review number: " + str(i)
-        review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(2, review) 
-        pdf.ln()
-        text = "Review by - " + str(dataframepd[dataframepd.columns[1]].values.tolist()[i])
-        review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(2, review) 
-        pdf.ln()
-        text = "Score - " + str(dataframepd[dataframepd.columns[4]].values.tolist()[i]) + ":"
-        review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(2, review) 
-        pdf.ln()
-        text = "Date and time - " + dataframepd[dataframepd.columns[7]].values.tolist()[i] + ":"
-        review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(2, review) 
-        pdf.ln()
-        text = str(dataframepd[dataframepd.columns[3]].values.tolist()[i]) + ":"
-        review = text.encode('latin-1', 'replace').decode('latin-1')
-        pdf.write(2, review)
-        pdf.ln()
-        pdf.ln()
+    options = {    'page-size': 'Letter',
+    'margin-top': '0mm',
+    'margin-right': '0mm',
+    'margin-bottom': '0mm',
+    'margin-left': '0mm'
+    }
 
+    pdfkit.configuration(wkhtmltopdf='/usr/local/bin/wkhtmltopdf')
+    pdfkit.from_string(html_table, 'outputs.pdf', options=options)
 
-    pdf.output("Comments-" + "play_store-" + AppName + ".pdf")
     print("Successfully saved to disk!")
 
 Scraper(AppCountry, AppName)
